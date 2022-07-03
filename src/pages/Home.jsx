@@ -15,7 +15,7 @@ const Home = () => {
       console.log(error);
     }
   };
-
+  console.log(tutorials);
   useEffect(() => {
     getTutorials();
   }, []);
