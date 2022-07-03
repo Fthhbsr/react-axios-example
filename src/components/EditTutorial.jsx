@@ -5,7 +5,9 @@ const EditTutorial = ({ editTutorial, id, title, desc }) => {
   const [descEdit, setDescEdit] = useState(desc);
 
   const editFunction = () => {
-    editTutorial(id, titleEdit, descEdit);
+    titleEdit || editTutorial(id, title, descEdit);
+    descEdit || editTutorial(id, titleEdit, desc);
+    titleEdit && descEdit && editTutorial(id, titleEdit, descEdit);
     setTitleEdit("");
     setDescEdit("");
   };
