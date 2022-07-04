@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const EditTutorial = ({ editTutorial, id, title, desc }) => {
-  const [titleEdit, setTitleEdit] = useState(title);
-  const [descEdit, setDescEdit] = useState(desc);
+  console.log(id, title, desc);
+  const [titleEdit, setTitleEdit] = useState();
+  const [descEdit, setDescEdit] = useState();
+
+  useEffect(() => {
+    setTitleEdit(title);
+    setDescEdit(desc);
+  }, [title, desc]);
 
   const editFunction = () => {
     titleEdit || editTutorial(id, title, descEdit);
@@ -35,7 +41,7 @@ const EditTutorial = ({ editTutorial, id, title, desc }) => {
                 className="form-control"
                 id="title"
                 placeholder="Enter your title"
-                value={titleEdit}
+                value={titleEdit || ""}
                 onChange={(e) => setTitleEdit(e.target.value)}
                 required
               />
@@ -49,7 +55,7 @@ const EditTutorial = ({ editTutorial, id, title, desc }) => {
                 className="form-control"
                 id="desc"
                 placeholder="Enter your Description"
-                value={descEdit}
+                value={descEdit || ""}
                 onChange={(e) => setDescEdit(e.target.value)}
                 required
               />
@@ -66,8 +72,8 @@ const EditTutorial = ({ editTutorial, id, title, desc }) => {
             <button
               type="button"
               className="btn btn-primary"
-              data-bs-dismiss="modal"
               onClick={() => editFunction()}
+              data-bs-dismiss="modal"
             >
               Save changes
             </button>
